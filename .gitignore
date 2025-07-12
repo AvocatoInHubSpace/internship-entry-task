@@ -1,0 +1,81 @@
+# Build results
+bin/
+obj/
+
+# Publish
+publish/
+out/
+
+# Rider
+.idea/
+*.sln.iml
+.localhistory/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# ASP.NET Core User secrets
+secrets.json
+
+# App settings (локальные и приватные обычно не в репозитории)
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/appsettings.*.local.json
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Logs
+*.log
+
+# Tests results
+TestResults/
+coverage/
+*.coverage
+
+# ReSharper & dotCover
+_ReSharper*/
+*.DotSettings.user
+*.dotCover
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Node.js, Yarn etc.
+node_modules/
+yarn.lock
+
+# Backup & temporary files
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+*.tmp
+~$*
+
+# Docker (важно!)
+docker-compose.override.yml
+docker-compose.*.yml
+*.env
+.env.*
+.docker/
+
+# Docker generated
+*.tar
+*~        # временные файлы редакторов
+
+# Кеш docker compose
+**/.docker-compose

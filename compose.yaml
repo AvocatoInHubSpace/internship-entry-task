@@ -1,0 +1,7 @@
+﻿services:
+  internshipentrytask:
+    image: internshipentrytask
+    build:
+      context: .
+      dockerfile: InternshipEntryTask/Dockerfile
+
