@@ -9,11 +9,11 @@ public class TicTacToeGame
     public const char Empty = '_';
     
     public int Id { get; init; }
-    public byte Size { get; private set; }
-    public byte WinLineSize { get; private set; }
-    private bool IsXMove { get; set; } = true;
+    public byte Size { get; init; }
+    public byte WinLineSize { get; init; }
+    public bool IsXMove { get; private set; } = true;
 
-    private ushort MovesCount { get; set; } = 0;
+    public ushort MovesCount { get; private set; } = 0;
     public GameState State { get; private set; } = GameState.Process;
     
     public string Field { get; private set; }
