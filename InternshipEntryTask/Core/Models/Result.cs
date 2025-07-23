@@ -1,4 +1,4 @@
-﻿namespace InternshipEntryTask.Infrastructure;
+﻿namespace InternshipEntryTask.Core.Models;
 
 public class Result
 {

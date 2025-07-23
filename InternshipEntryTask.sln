@@ -4,9 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipEntryTask", "Inte
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F23893EE-43BA-47CC-8CAC-CAA90CEF1990}"
 	ProjectSection(SolutionItems) = preProject
-		compose.yaml = compose.yaml
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternshipEntryTask.Tests", "InternshipEntryTask.Tests\InternshipEntryTask.Tests.csproj", "{FC9A23C8-020D-4577-A7B1-EBD8617CC0BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +19,9 @@ Global
 		{973D49FE-2C18-49EF-B97A-7A9F647F666D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{973D49FE-2C18-49EF-B97A-7A9F647F666D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{973D49FE-2C18-49EF-B97A-7A9F647F666D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC9A23C8-020D-4577-A7B1-EBD8617CC0BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC9A23C8-020D-4577-A7B1-EBD8617CC0BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC9A23C8-020D-4577-A7B1-EBD8617CC0BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC9A23C8-020D-4577-A7B1-EBD8617CC0BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,4 @@
-﻿namespace InternshipEntryTask.Models;
+﻿namespace InternshipEntryTask.Core.Models;
 
 public enum GameState
 {
