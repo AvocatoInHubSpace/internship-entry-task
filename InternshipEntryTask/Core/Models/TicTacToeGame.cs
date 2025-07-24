@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using InternshipEntryTask.Core.Validators;
 
 namespace InternshipEntryTask.Core.Models;
 
@@ -9,8 +10,8 @@ public class TicTacToeGame
     public const char Empty = '_';
     
     public int Id { get; init; }
-    public byte Size { get; init; }
-    public byte WinLineSize { get; init; }
+    public byte Size { get; private set; }
+    public byte WinLineSize { get; private set; }
     public bool IsXMove { get; private set; } = true;
 
     public ushort MovesCount { get; private set; } = 0;
@@ -21,6 +22,9 @@ public class TicTacToeGame
     
     public TicTacToeGame(byte size, byte winLineSize)
     {
+        var result = TicTacToeGameParametersValidator.Validate(size, winLineSize);
+        if (result.IsSuccess is false) throw new ArgumentException(result.Error);
+        
         Size = size;
         WinLineSize = winLineSize;
         Field = new string(Empty, size * size);

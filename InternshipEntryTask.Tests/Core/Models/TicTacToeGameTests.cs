@@ -49,6 +49,23 @@ public class TicTacToeGameTests
         Assert.Equal(GameState.WinningX, game.State);
         
     }
+    
+    [Theory]
+    [InlineData(2, 2)]
+    [InlineData(3, 2)]
+    [InlineData(3, 4)]
+    public void Move_ShouldArgumentException_WhenSizeOrWinLineIsIncorrect(byte size, byte winLine)
+    {
+        // Act
+        void Act()
+        {
+            _ = new TicTacToeGame(size, winLine);
+        }
+
+        // Assert
+        Assert.Throws<ArgumentException>(Act);
+        
+    }
 
     [Theory]
     [InlineData("XO_" + 

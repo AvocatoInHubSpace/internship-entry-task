@@ -1,4 +1,5 @@
 using InternshipEntryTask.Infrastructure.Data;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddNpgsql<GameDbContext>(connectionString); 
+
+builder.Services.AddSingleton<IValidateOptions<TicTacToeGameOptions>, TicTacToeGameOptionsValidation>();
+builder.Services.AddOptions<TicTacToeGameOptions>()
+    .Bind(builder.Configuration.GetSection(TicTacToeGameOptions.SectionName))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
 
 var app = builder.Build();
 
