@@ -2,8 +2,8 @@
 
 public enum GameState
 {
-    Process,
+    InProgress,
     Draw,
-    WinningX,
-    WinningO,
+    XWon,
+    OWin,
 }

@@ -46,7 +46,7 @@ public class TicTacToeGameTests
         
         // Assert
         Assert.True(result.IsSuccess);
-        Assert.Equal(GameState.WinningX, game.State);
+        Assert.Equal(GameState.XWon, game.State);
         
     }
     
@@ -85,7 +85,7 @@ public class TicTacToeGameTests
         
         // Assert
         Assert.True(result.IsSuccess);
-        Assert.Equal(GameState.WinningX, game.State);
+        Assert.Equal(GameState.XWon, game.State);
         
     }
 
@@ -109,7 +109,7 @@ public class TicTacToeGameTests
         
         // Assert
         Assert.True(result.IsSuccess);
-        Assert.Equal(GameState.WinningO, game.State);
+        Assert.Equal(GameState.OWin, game.State);
     }
     
     [Fact]
@@ -161,7 +161,7 @@ public class TicTacToeGameTests
         
         // Assert
         Assert.False(result.IsSuccess);
-        Assert.Equal(GameState.Process, game.State);
+        Assert.Equal(GameState.InProgress, game.State);
     }
     
     [Fact]
@@ -175,7 +175,7 @@ public class TicTacToeGameTests
         
         // Assert
         Assert.False(result.IsSuccess);
-        Assert.Equal(GameState.Process, game.State);
+        Assert.Equal(GameState.InProgress, game.State);
     }
     
     [Fact]
@@ -191,7 +191,7 @@ public class TicTacToeGameTests
         
         // Assert
         Assert.False(result.IsSuccess);
-        Assert.Equal(GameState.Process, game.State);
+        Assert.Equal(GameState.InProgress, game.State);
     }
 
     private static void LoadGame(TicTacToeGame game, string field)

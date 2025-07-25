@@ -15,7 +15,7 @@ public class TicTacToeGame
     public bool IsXMove { get; private set; } = true;
 
     public ushort MovesCount { get; private set; } = 0;
-    public GameState State { get; private set; } = GameState.Process;
+    public GameState State { get; private set; } = GameState.InProgress;
     
     public string Field { get; private set; }
     
@@ -31,11 +31,12 @@ public class TicTacToeGame
     }
     
     
-    public Result Move(byte x, byte y, Func<bool> randomChangeToMove)
+    public Result<bool> Move(byte x, byte y, Func<bool> randomChangeToMove)
     {
         int position = Size * y + x;
         var validationResult = Validate(x, y, position);
-        if(validationResult.IsSuccess is false) return validationResult;
+        if(validationResult.IsSuccess is false) 
+            return Result<bool>.Failure(validationResult.Error);
         
         MovesCount++;
         var isXMove = DetermineCurrentMoveIsX(randomChangeToMove);
@@ -49,20 +50,20 @@ public class TicTacToeGame
 
         if (CheckWinAt(x, y, unit))
         {
-            State = isXMove ? GameState.WinningX : GameState.WinningO;
+            State = isXMove ? GameState.XWon : GameState.OWin;
         }
         else if (MovesCount == Size * Size)
         {
             State = GameState.Draw;
         }
         
-        return Result.Success();
+        return Result<bool>.Success(isXMove);
     }
 
     private Result Validate(byte x, byte y, int position)
     {
         if(x >= Size || y >= Size) return Result.Failure("Cell position ({x}, {y}) is outside the game field.");
-        if(State != GameState.Process) return Result.Failure("Game is end");
+        if(State != GameState.InProgress) return Result.Failure("Game is end");
         if(Field[position] != Empty) return Result.Failure("Cell is not empty");
         return Result.Success();
     }

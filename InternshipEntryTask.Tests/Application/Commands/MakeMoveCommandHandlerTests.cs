@@ -20,7 +20,7 @@ public class MakeMoveCommandHandlerTests
             .ReturnsAsync(Result<TicTacToeGame>.Success(game));
         _mockGameService.Setup(gs => 
                 gs.Move(It.IsNotNull<TicTacToeGame>(), It.IsAny<byte>(), It.IsAny<byte>()))
-            .Returns(Result<TicTacToeGame>.Success(game));
+            .Returns(Result<bool>.Success(true));
         var handler = new MakeMoveCommandHandler(_mockRepository.Object, _mockGameService.Object);
         
         // Act
@@ -29,7 +29,6 @@ public class MakeMoveCommandHandlerTests
         // Assert
         Assert.NotNull(result);
         Assert.True(result.IsSuccess);
-        Assert.Equal(result.Value, game);        
         _mockGameService.Verify(gs => 
             gs.Move(It.IsNotNull<TicTacToeGame>(), It.IsAny<byte>(), It.IsAny<byte>()), Times.Once);
         _mockRepository.Verify(r => 
@@ -48,7 +47,7 @@ public class MakeMoveCommandHandlerTests
             .ReturnsAsync(Result<TicTacToeGame>.Failure());
         _mockGameService.Setup(gs => 
                 gs.Move(It.IsNotNull<TicTacToeGame>(), It.IsAny<byte>(), It.IsAny<byte>()))
-            .Returns(Result<TicTacToeGame>.Success(game));
+            .Returns(Result<bool>.Failure());
         var handler = new MakeMoveCommandHandler(_mockRepository.Object, _mockGameService.Object);
         
         // Act
@@ -77,7 +76,7 @@ public class MakeMoveCommandHandlerTests
             .ReturnsAsync(Result<TicTacToeGame>.Success(game));
         _mockGameService.Setup(gs => 
                 gs.Move(It.IsNotNull<TicTacToeGame>(), It.IsAny<byte>(), It.IsAny<byte>()))
-            .Returns(Result<TicTacToeGame>.Failure());
+            .Returns(Result<bool>.Failure());
         var handler = new MakeMoveCommandHandler(_mockRepository.Object, _mockGameService.Object);
         
         // Act
