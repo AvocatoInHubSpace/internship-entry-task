@@ -1,5 +1,5 @@
-﻿using InternshipEntryTask.Application.Settings;
-using InternshipEntryTask.Core.Interfaces;
+﻿using InternshipEntryTask.Application.Interfaces;
+using InternshipEntryTask.Application.Settings;
 using InternshipEntryTask.Core.Models;
 using MediatR;
 using Microsoft.Extensions.Options;

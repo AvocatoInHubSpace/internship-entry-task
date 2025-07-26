@@ -1,4 +1,4 @@
-﻿namespace InternshipEntryTask.Core.Interfaces;
+﻿namespace InternshipEntryTask.Application.Interfaces;
 
 public interface IRandomService
 {

@@ -1,4 +1,4 @@
-﻿using InternshipEntryTask.Core.Interfaces;
+﻿using InternshipEntryTask.Application.Interfaces;
 
 namespace InternshipEntryTask.Application.Services;
 

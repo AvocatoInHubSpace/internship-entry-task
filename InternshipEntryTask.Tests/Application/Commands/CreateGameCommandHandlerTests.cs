@@ -1,6 +1,6 @@
 ﻿using InternshipEntryTask.Application.Commands;
+using InternshipEntryTask.Application.Interfaces;
 using InternshipEntryTask.Application.Settings;
-using InternshipEntryTask.Core.Interfaces;
 using InternshipEntryTask.Core.Models;
 using Microsoft.Extensions.Options;
 using Moq;

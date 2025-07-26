@@ -1,5 +1,7 @@
 ﻿using InternshipEntryTask.Application.Commands;
-using InternshipEntryTask.Core.Interfaces;
+using InternshipEntryTask.Application.Common;
+using InternshipEntryTask.Application.Interfaces;
+using InternshipEntryTask.Core.Common;
 using InternshipEntryTask.Core.Models;
 using Moq;
 
@@ -17,10 +19,10 @@ public class MakeMoveCommandHandlerTests
         var command = new MakeMoveCommand(0, 0, 0);        
         var game = new TicTacToeGame(3, 3);
         _mockRepository.Setup(r => r.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result<TicTacToeGame>.Success(game));
+            .ReturnsAsync(game);
         _mockGameService.Setup(gs => 
                 gs.Move(It.IsNotNull<TicTacToeGame>(), It.IsAny<byte>(), It.IsAny<byte>()))
-            .Returns(Result<bool>.Success(true));
+            .Returns(Result<bool, AppErrors>.Success(true));
         var handler = new MakeMoveCommandHandler(_mockRepository.Object, _mockGameService.Object);
         
         // Act
@@ -42,12 +44,11 @@ public class MakeMoveCommandHandlerTests
     {
         // Arrange
         var command = new MakeMoveCommand(0, 0, 0);        
-        var game = new TicTacToeGame(3, 3);
         _mockRepository.Setup(r => r.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result<TicTacToeGame>.Failure());
+            .ReturnsAsync(default(TicTacToeGame));
         _mockGameService.Setup(gs => 
                 gs.Move(It.IsNotNull<TicTacToeGame>(), It.IsAny<byte>(), It.IsAny<byte>()))
-            .Returns(Result<bool>.Failure());
+            .Returns(Result<bool, AppErrors>.Failure(AppErrors.GameNotFound));
         var handler = new MakeMoveCommandHandler(_mockRepository.Object, _mockGameService.Object);
         
         // Act
@@ -73,10 +74,10 @@ public class MakeMoveCommandHandlerTests
         var command = new MakeMoveCommand(0, 0, 0);        
         var game = new TicTacToeGame(3, 3);
         _mockRepository.Setup(r => r.GetAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result<TicTacToeGame>.Success(game));
+            .ReturnsAsync(game);
         _mockGameService.Setup(gs => 
                 gs.Move(It.IsNotNull<TicTacToeGame>(), It.IsAny<byte>(), It.IsAny<byte>()))
-            .Returns(Result<bool>.Failure());
+            .Returns(Result<bool, AppErrors>.Failure(AppErrors.InvalidInputData));
         var handler = new MakeMoveCommandHandler(_mockRepository.Object, _mockGameService.Object);
         
         // Act

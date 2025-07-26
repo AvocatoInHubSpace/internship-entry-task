@@ -1,20 +1,20 @@
-﻿using InternshipEntryTask.Application.DTOs;
-using InternshipEntryTask.Core.Interfaces;
-using InternshipEntryTask.Core.Models;
+﻿using InternshipEntryTask.Application.Common;
+using InternshipEntryTask.Application.DTOs;
+using InternshipEntryTask.Application.Interfaces;
+using InternshipEntryTask.Core.Common;
 using MediatR;
 
 namespace InternshipEntryTask.Application.Commands;
 
-public class MakeMoveCommandHandler(ITicTacToeGameRepository repository, ITicTacToeGameService gameService) : IRequestHandler<MakeMoveCommand, Result<MoveDto>>
+public class MakeMoveCommandHandler(ITicTacToeGameRepository repository, ITicTacToeGameService gameService) : IRequestHandler<MakeMoveCommand, Result<MoveDto, AppErrors>>
 {
-    public async Task<Result<MoveDto>> Handle(MakeMoveCommand request, CancellationToken cancellationToken)
+    public async Task<Result<MoveDto, AppErrors>> Handle(MakeMoveCommand request, CancellationToken cancellationToken)
     {
-        var gameResult = await repository.GetAsync(request.GameId, cancellationToken);
-        if (gameResult.IsSuccess is false) return Result<MoveDto>.Failure(gameResult.Error);
-        var game = gameResult.Value;
+        var game = await repository.GetAsync(request.GameId, cancellationToken);
+        if (game is null) return AppErrors.GameNotFound.GetAppErrorResult<MoveDto>();
         var result = gameService.Move(game!, request.X, request.Y);
 
-        if (!result.IsSuccess) return Result<MoveDto>.Failure(result.Error);
+        if (!result.IsSuccess) return result.Error.GetAppErrorResult<MoveDto>();
         
         await repository.UpdateAsync(game!, cancellationToken);
         
@@ -25,6 +25,6 @@ public class MakeMoveCommandHandler(ITicTacToeGameRepository repository, ITicTac
             X = request.X,
             Y = request.Y
         };
-        return Result<MoveDto>.Success(move);
+        return Result<MoveDto, AppErrors>.Success(move);
     }
 }

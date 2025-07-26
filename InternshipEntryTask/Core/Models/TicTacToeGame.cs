@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using InternshipEntryTask.Core.Common;
 using InternshipEntryTask.Core.Validators;
 
 namespace InternshipEntryTask.Core.Models;
@@ -31,12 +32,12 @@ public class TicTacToeGame
     }
     
     
-    public Result<bool> Move(byte x, byte y, Func<bool> randomChangeToMove)
+    public Result<bool, GameErrors> Move(byte x, byte y, Func<bool> randomChangeToMove)
     {
         int position = Size * y + x;
         var validationResult = Validate(x, y, position);
         if(validationResult.IsSuccess is false) 
-            return Result<bool>.Failure(validationResult.Error);
+            return Result<bool, GameErrors>.Failure(validationResult.Error);
         
         MovesCount++;
         var isXMove = DetermineCurrentMoveIsX(randomChangeToMove);
@@ -57,15 +58,15 @@ public class TicTacToeGame
             State = GameState.Draw;
         }
         
-        return Result<bool>.Success(isXMove);
+        return Result<bool, GameErrors>.Success(isXMove);
     }
 
-    private Result Validate(byte x, byte y, int position)
+    private Result<GameErrors> Validate(byte x, byte y, int position)
     {
-        if(x >= Size || y >= Size) return Result.Failure("Cell position ({x}, {y}) is outside the game field.");
-        if(State != GameState.InProgress) return Result.Failure("Game is end");
-        if(Field[position] != Empty) return Result.Failure("Cell is not empty");
-        return Result.Success();
+        if(x >= Size || y >= Size) return Result<GameErrors>.Failure(GameErrors.InvalidInputData, "Cell position ({x}, {y}) is outside the game field.");
+        if(State != GameState.InProgress) return Result<GameErrors>.Failure(GameErrors.GameIsEnd, "Game is end");
+        if(Field[position] != Empty) return Result<GameErrors>.Failure(GameErrors.CellIsOccupied, "Cell is not empty");
+        return Result<GameErrors>.Success();
     }
 
     private bool DetermineCurrentMoveIsX(Func<bool> randomChangeToMove)

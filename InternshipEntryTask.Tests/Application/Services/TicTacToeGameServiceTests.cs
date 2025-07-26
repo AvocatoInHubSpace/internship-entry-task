@@ -1,5 +1,5 @@
-﻿using InternshipEntryTask.Application.Services;
-using InternshipEntryTask.Core.Interfaces;
+﻿using InternshipEntryTask.Application.Interfaces;
+using InternshipEntryTask.Application.Services;
 using InternshipEntryTask.Core.Models;
 using Moq;
 using Range = Moq.Range;
